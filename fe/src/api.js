@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://khaosat.xuantan.id.vn',
+  baseURL: 'https://khaosat.xuantan.id.vn',
   withCredentials: true,
 });
 
