@@ -1,0 +1,47 @@
+.dialog {
+    paper {
+      border-radius: 8px;
+    }
+  }
+  
+  .dialogContent {
+    padding: 24px !important;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .formField {
+    margin-bottom: 0 !important;
+  }
+  
+  .dialogActions {
+    padding: 16px 24px !important;
+  }
+  
+  .alert {
+    margin-bottom: 16px;
+  }
+  
+  .formField input,
+  .formField label {
+    font-size: 14px;
+  }
+  
+  .formField label.Mui-focused {
+    color: #1976d2;
+  }
+  
+  .formField .MuiOutlinedInput-root {
+    &:hover fieldset {
+      border-color: #1976d2;
+    }
+    &.Mui-focused fieldset {
+      border-color: #1976d2;
+    }
+  }
+  
+  .helperText {
+    margin-left: 14px;
+    font-size: 12px;
+  }

@@ -1,0 +1,187 @@
+.container {
+  margin: 0 auto;
+  padding: 2rem 6rem;
+  min-height: 100vh;
+  background-color: #f8fafc;
+ }
+ 
+ .studentInfo {
+  background: linear-gradient(135deg, #e9f2ff 0%, #f5f9ff 100%);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e1e8f0;
+ }
+ 
+ .studentInfo h2 {
+  color: #1e3a8a;
+  margin-bottom: 1rem;
+  font-weight: 600;
+ }
+ 
+ .studentInfo p {
+  color: #475569;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  line-height: 1.5;
+ }
+ 
+ .pageTitle {
+  color: #1e293b;
+  margin: 2rem 0;
+  font-size: 1.875rem;
+  font-weight: bold;
+  text-align: center;
+ }
+ 
+ .surveyGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem 0;
+ }
+ 
+ .surveyCard {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+ }
+ 
+ .surveyCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+ }
+ 
+ .surveyName {
+  color: #1e293b;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+ }
+ 
+ .surveyInfo {
+  color: #64748b;
+  font-size: 0.875rem;
+ }
+ 
+ .surveyInfo p {
+  margin: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+ }
+ 
+ .loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-size: 1.125rem;
+  color: #3b82f6;
+ }
+ 
+ .error {
+  text-align: center;
+  padding: 2rem;
+  color: #ef4444;
+  background: #fef2f2;
+  border-radius: 8px;
+  margin: 2rem 0;
+ }
+ 
+ .surveySection {
+  margin: 2rem 0;
+ }
+ 
+ .sectionTitle {
+  color: #1e293b;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e2e8f0;
+ }
+ 
+ .badges {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+ }
+ 
+ .badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+ }
+ 
+ .badgeGeneral {
+  background-color: #818cf8;
+  color: white;
+ }
+ 
+ .badgeSubject {
+  background-color: #3b82f6;
+  color: white;
+ }
+ 
+ .badgeCompleted {
+  background-color: #34d399;
+  color: white;
+ }
+ 
+ .badgeAvailable {
+  background-color: #2563eb;
+  color: white;
+ }
+ 
+ .completedCard {
+  background-color: #fef2f2;
+  border-left: 4px solid #34d399;
+ }
+ 
+ .availableCard {
+  background-color: white;
+  border-left: 4px solid #2563eb;
+ }
+ 
+ .availableCard:hover {
+  border-color: #2563eb;
+ }
+ 
+ .completedCard:hover {
+  border-color: #34d399;
+ }
+ 
+ .label {
+  font-weight: 500;
+  color: #475569;
+ }
+ 
+ .emptyMessage {
+  text-align: center;
+  padding: 2rem;
+  color: #6b7280;
+  font-size: 1rem;
+ }
+ 
+ @media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+  
+  .surveyGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .studentInfo {
+    padding: 1rem;
+  }
+ }

@@ -1,0 +1,105 @@
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8fafc;
+}
+
+.header {
+  background: white;
+  padding: 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  color: #3b82f6;
+  font-size: 1rem;
+  padding: 0.5rem 0;
+  transition: all 0.2s ease;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.backButton:hover {
+  color: #2563eb;
+  transform: translateX(-4px);
+}
+
+.backIcon {
+  margin-right: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 1rem 0;
+}
+
+.surveyInfo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: center;
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.badgeGeneral {
+  background-color: #ebf8ff;
+  color: #2b6cb0;
+}
+
+.badgeSubject {
+  background-color: #f0fff4;
+  color: #2f855a;
+}
+
+.formContainer {
+  flex: 1;
+  margin: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: relative;
+}
+
+.iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: white;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-size: 1.125rem;
+  color: #3b82f6;
+}
+
+.error {
+  text-align: center;
+  padding: 2rem;
+  color: #ef4444;
+  background: #fef2f2;
+  border-radius: 8px;
+  margin: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}

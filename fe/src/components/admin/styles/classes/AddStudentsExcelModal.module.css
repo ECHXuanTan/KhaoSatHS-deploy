@@ -1,0 +1,41 @@
+.content {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 0;
+}
+
+.uploadBox {
+  border: 2px dashed #ccc;
+  border-radius: 4px;
+  padding: 20px;
+  text-align: center;
+  margin-top: 16px;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+}
+
+.uploadBox:hover {
+  border-color: #1976d2;
+}
+
+.uploadIcon {
+  color: #757575;
+  font-size: 48px;
+  margin-bottom: 8px;
+}
+
+.errorMessage {
+  color: #d32f2f;
+  margin-top: 8px;
+}
+
+@media (max-width: 600px) {
+  .content {
+    min-height: 180px;
+  }
+  
+  .uploadBox {
+    padding: 16px;
+  }
+}

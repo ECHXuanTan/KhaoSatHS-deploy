@@ -1,0 +1,27 @@
+.dialog {
+  padding: 16px;
+}
+
+.dialogTitle {
+  color: #1976d2;
+  padding-bottom: 8px;
+}
+
+.formGroup {
+  margin-bottom: 24px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.dialogActions {
+  padding: 16px 24px;
+}
+
+.formGroup:last-child {
+  margin-bottom: 0;
+}

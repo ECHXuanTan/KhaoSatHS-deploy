@@ -1,0 +1,89 @@
+/* styles/admin/Students.module.css */
+.pageContainer {
+  padding: 24px;
+  margin-left: 250px;
+  transition: margin-left 0.3s ease;
+}
+
+.expanded {
+  margin-left: 64px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #1a237e;
+}
+
+.tableContainer {
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.tableContainer td {
+  padding: 12px 16px;
+}
+
+.tableContainer th {
+  background-color: #f5f5f5;
+  font-weight: 600;
+  padding: 12px 16px;
+}
+
+.loadingOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.noData {
+  text-align: center;
+  padding: 32px;
+  color: #666;
+}
+
+.actionButton {
+  margin-left: 8px;
+}
+
+.filterContainer {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  
+  .tableContainer {
+    overflow-x: auto;
+  }
+  
+  .filterContainer {
+    flex-direction: column;
+  }
+  
+  .filterContainer > * {
+    width: 100%;
+  }
+}
