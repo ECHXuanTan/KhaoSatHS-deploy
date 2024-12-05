@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://khaosat.xuantan.id.vn',
+  baseURL: 'https://dkmh-server.click',
   withCredentials: true,
 });
 

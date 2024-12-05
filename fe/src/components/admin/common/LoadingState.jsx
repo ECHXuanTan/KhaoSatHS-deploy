@@ -7,7 +7,7 @@ const LoadingState = () => {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      minHeight: '200px',
+      minHeight: '100vh',
       gap: '16px',
     },
     loadingText: {

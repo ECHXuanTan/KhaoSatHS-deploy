@@ -27,7 +27,7 @@ const Login = () => {
                         navigate('/student-survey');
                         break;
                     case 2:
-                        navigate('/admin-dashboard');
+                        navigate('/teacher-dashboard');
                         break;
                     case 1:
                         navigate('/ministry-declare');
@@ -64,7 +64,7 @@ const Login = () => {
                 navigate('/student-survey');
                 break;
             case 2:
-                navigate('/admin-dashboard');
+                navigate('/teacher-dashboard');
                 break;
             case 1:
                 navigate('/ministry-declare');

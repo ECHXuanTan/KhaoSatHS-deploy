@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import { getSurveysByStudent } from '../../services/surveyServices.js';
 import styles from '../../styles/student/SurveyList.module.css';
+import LoadingState from '../../components/admin/common/LoadingState.jsx'
 
 const SurveyListPage = () => {
   const [surveys, setSurveys] = useState([]);
@@ -26,7 +28,7 @@ const SurveyListPage = () => {
     fetchSurveys();
   }, []);
 
-  if (loading) return <div className={styles.loading}>Đang tải...</div>;
+  if (loading) return <LoadingState/>;
   if (error) return <div className={styles.error}>{error}</div>;
 
   const formatDate = (dateString) => {
@@ -80,6 +82,9 @@ const SurveyListPage = () => {
 
   return (
     <div className={styles.container}>
+      <Helmet>
+        <title>Danh Sách Khảo Sát | Trường Phổ Thông Năng Khiếu</title>
+      </Helmet>
       {student && (
         <div className={styles.studentInfo}>
           <h2>Thông tin học sinh</h2>
@@ -102,7 +107,7 @@ const SurveyListPage = () => {
       </div>
 
       <div className={styles.surveySection}>
-        <h2 className={styles.sectionTitle}>Khảo sát đã hoàn thành ({completedSurveys.length})</h2>
+        <h2 className={styles.sectionTitle}>Khảo sát đã hoàn thành ({completedSurveys.length}) <br/> <span style={{color: 'red', fontStyle: 'italic', fontSize: '18px'}}>Dữ liệu sẽ cập nhật sau 5 phút</span></h2>
         <div className={styles.surveyGrid}>
           {completedSurveys.map((survey) => (
             <SurveyCard key={survey.id} survey={survey} />

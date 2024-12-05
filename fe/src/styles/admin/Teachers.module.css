@@ -1,63 +1,78 @@
 /* src/styles/admin/Teachers.module.css */
 .pageContainer {
-    padding: 24px;
-    background-color: #f5f5f5;
-    min-height: 100vh;
-    margin-left: 70px;
-    transition: margin-left 0.3s ease;
+  padding: 24px;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  margin-left: 70px;
+  transition: margin-left 0.3s ease;
+}
+
+.pageContainer.expanded {
+  margin-left: 260px;
+}
+
+.pageTitle {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 16px;
+}
+
+.headerActions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.filtersContainer {
+  display: flex;
+  gap: 16px;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 16px;
+}
+
+.tableContainer {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.addButton {
+  text-transform: none !important;
+}
+
+.tableContainer > div {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.tableCell {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+.departmentSelect {
+  min-width: 130px;
+}
+@media (max-width: 768px) {
+  .pageContainer {
+    padding: 16px;
   }
-  
-  .pageContainer.expanded {
-    margin-left: 260px;
+
+  .headerActions {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
   }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
-  }
-  
-  .header h1 {
-    margin: 0;
-    font-size: 24px;
-    color: #333;
-  }
-  
-  .tableContainer {
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
+
   .addButton {
-    text-transform: none !important;
+    width: 100%;
   }
-  
-  .tableContainer > div {
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  
-  .tableCell {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 200px;
-  }
-  
-  @media (max-width: 768px) {
-    .pageContainer {
-      padding: 16px;
-    }
-    
-    .header {
-      flex-direction: column;
-      gap: 16px;
-      align-items: flex-start;
-    }
-    
-    .addButton {
-      width: 100%;
-    }
-  }
+}

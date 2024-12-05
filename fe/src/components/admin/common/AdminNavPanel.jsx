@@ -13,6 +13,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import LogoutIcon from '@mui/icons-material/Logout';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
+import CastForEducationIcon from '@mui/icons-material/CastForEducation';
+import { logout } from '../../../services/authServices';
 
 const AdminNavPanel = () => {
   const { isNavExpanded, setIsNavExpanded } = useNavigation();
@@ -21,10 +24,11 @@ const AdminNavPanel = () => {
   const navigationItems = [
     { path: '/admin/dashboard', label: 'Dashboard', icon: <DashboardIcon /> },
     { path: '/admin/subjects', label: 'Môn học', icon: <LibraryBooksIcon /> },
-    { path: '/admin/teachers', label: 'Giáo viên', icon: <GroupIcon /> },
+    { path: '/admin/teachers', label: 'Giáo viên', icon: <CastForEducationIcon /> },
     { path: '/admin/classes', label: 'Lớp học', icon: <SchoolIcon /> },
     { path: '/admin/students', label: 'Học sinh', icon: <PeopleIcon /> },
     { path: '/admin/surveys', label: 'Khảo sát', icon: <AssessmentIcon /> },
+    { path: '/admin/users', label: 'Tài khoản', icon: <SupervisedUserCircleIcon /> },
   ];
 
   return (
@@ -57,7 +61,7 @@ const AdminNavPanel = () => {
         {isNavExpanded ? (
           <>
             <span className={styles.username}>Admin User</span>
-            <button className={styles.logoutButton}>
+            <button className={styles.logoutButton} onClick={logout}>
               <LogoutIcon />
               <span>Đăng xuất</span>
             </button>

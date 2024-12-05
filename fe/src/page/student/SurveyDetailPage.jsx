@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getSurveysByStudent } from '../../services/surveyServices.js';
+import { Helmet } from 'react-helmet-async';
 import styles from '../../styles/student/SurveyDetail.module.css';
+import LoadingState from '../../components/admin/common/LoadingState.jsx';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const SurveyDetailPage = () => {
   const { id } = useParams();
@@ -9,6 +12,7 @@ const SurveyDetailPage = () => {
   const [survey, setSurvey] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [iframeLoading, setIframeLoading] = useState(true);
 
   useEffect(() => {
     const fetchSurvey = async () => {
@@ -29,7 +33,7 @@ const SurveyDetailPage = () => {
     fetchSurvey();
   }, [id]);
 
-  if (loading) return <div className={styles.loading}>Đang tải...</div>;
+  if (loading) return <LoadingState />;
   if (error) return <div className={styles.error}>{error}</div>;
   if (!survey) return <div className={styles.error}>Không tìm thấy khảo sát</div>;
 
@@ -43,12 +47,15 @@ const SurveyDetailPage = () => {
 
   return (
     <div className={styles.container}>
+       <Helmet>
+        <title>{survey.name} | Trường Phổ Thông Năng Khiếu</title>
+      </Helmet>
       <div className={styles.header}>
         <button
           onClick={() => navigate('/student-survey')}
           className={styles.backButton}
         >
-          <span className={styles.backIcon}>←</span>
+          <ArrowBackIcon/>
           Quay lại danh sách
         </button>
         <h1 className={styles.title}>{survey.name}</h1>
@@ -68,10 +75,12 @@ const SurveyDetailPage = () => {
       </div>
       
       <div className={styles.formContainer}>
+        {iframeLoading && <LoadingState />}
         <iframe
           src={survey.form_url}
           className={styles.iframe}
           title={survey.name}
+          onLoad={() => setIframeLoading(false)}
         />
       </div>
     </div>

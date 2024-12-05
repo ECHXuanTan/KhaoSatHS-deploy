@@ -1,0 +1,58 @@
+.container {
+    padding: 24px;
+    display: flex; 
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .alert {
+    background-color: #f0f9ff;
+  }
+  
+  .alert .MuiAlert-icon {
+    color: #0284c7;
+  }
+  
+  .infoSection {
+    padding: 16px;
+  }
+  
+  .infoHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  
+  .infoTitle {
+    font-weight: bold;
+  }
+  
+  .infoIcon {
+    font-size: 40px;
+    color: rgba(0, 0, 0, 0.54);
+  }
+  
+  .tableSection {
+    padding: 16px;
+  }
+  
+  .tableHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .tableTitle {
+    font-weight: bold;
+  }
+  
+  .searchInput {
+    width: 200px;
+  }
+  
+  .tableContainer {
+    max-height: 400px;
+    overflow: auto;
+  }
