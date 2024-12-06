@@ -1,106 +1,138 @@
 .container {
-  height: 120vh;
-  display: flex;
-  flex-direction: column;
+  padding: 2rem;
+  max-width: 1200px;
   margin: 0 auto;
-  max-width: 1370px;
 }
 
 .header {
-  background: white;
-  padding: 1.5rem;
-  border-bottom: 1px solid #e2e8f0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
 }
 
 .backButton {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  color: #3b82f6;
-  font-size: 1rem;
-  padding: 0.5rem 0;
-  transition: all 0.2s ease;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
   border: none;
-  background: none;
+  background: transparent;
+  color: #1a73e8;
   cursor: pointer;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
 }
 
 .backButton:hover {
-  color: #2563eb;
-  transform: translateX(-4px);
-}
-
-.backIcon {
-  margin-right: 0.5rem;
-  font-size: 1.25rem;
+  background: rgba(26, 115, 232, 0.1);
+  border-radius: 4px;
 }
 
 .title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #1e293b;
-  margin: 1rem 0;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #202124;
 }
 
 .surveyInfo {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
   align-items: center;
-  color: #64748b;
-  font-size: 0.95rem;
+}
+
+.infoItem {
+  color: #5f6368;
+  font-size: 0.9rem;
+}
+
+.badgeContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .badge {
-  display: inline-block;
   padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  font-size: 0.875rem;
+  border-radius: 16px;
+  font-size: 0.8rem;
   font-weight: 500;
 }
 
 .badgeGeneral {
-  background-color: #ebf8ff;
-  color: #2b6cb0;
+  background-color: #e8f0fe;
+  color: #1a73e8;
 }
 
 .badgeSubject {
-  background-color: #f0fff4;
-  color: #2f855a;
+  background-color: #fce8e6;
+  color: #d93025;
+}
+
+.openNewTabIcon {
+  padding: 4px !important;
+  color: #5f6368;
+}
+
+.openNewTabIcon:hover {
+  background-color: rgba(95, 99, 104, 0.1) !important;
 }
 
 .formContainer {
-  flex: 1;
-  margin: 1rem;
   background: white;
   border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
   position: relative;
+  min-height: 600px;
 }
 
 .iframe {
   width: 100%;
-  height: 100%;
+  min-height: 800px;
   border: none;
-  background: white;
-}
-
-.loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  font-size: 1.125rem;
-  color: #3b82f6;
-}
-
-.error {
-  text-align: center;
-  padding: 2rem;
-  color: #ef4444;
-  background: #fef2f2;
   border-radius: 8px;
-  margin: 2rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.3s;
+}
+
+.hidden {
+  display: none;
+}
+
+.iframeLoading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.iframeError {
+  padding: 2rem;
+}
+
+.openNewTabButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #dadce0;
+  background: white;
+  color: #1a73e8;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin: 0 auto;
+}
+
+.openNewTabButton:hover {
+  background: #f8f9fa;
+}
+
+.loadingContainer,
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  padding: 2rem;
 }
