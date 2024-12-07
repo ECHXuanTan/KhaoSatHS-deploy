@@ -6,7 +6,7 @@ import styles from '../../styles/student/SurveyDetail.module.css';
 import LoadingState from '../../components/admin/common/LoadingState.jsx';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import { Alert, AlertTitle, IconButton, Tooltip } from '@mui/material';
+import { Alert, AlertTitle, IconButton, Tooltip, Button } from '@mui/material';
 
 const SurveyDetailPage = () => {
   const { id } = useParams();
@@ -27,15 +27,12 @@ const SurveyDetailPage = () => {
           throw new Error('Không tìm thấy khảo sát');
         }
 
-        let formUrl = foundSurvey.form_url;
-        if (formUrl.includes('viewform')) {
-          formUrl = formUrl.replace('viewform', 'embedded');
+        const formUrl = foundSurvey.form_url;
+        if (!formUrl.includes('embedded=true')) {
+          const urlObj = new URL(formUrl);
+          urlObj.searchParams.set('embedded', 'true');
+          foundSurvey.form_url = urlObj.toString();
         }
-        
-        const urlObj = new URL(formUrl);
-        urlObj.searchParams.set('embedded', 'true');
-        urlObj.searchParams.set('usp', 'pp_url');
-        foundSurvey.form_url = urlObj.toString();
         
         setSurvey(foundSurvey);
       } catch (err) {
@@ -60,7 +57,9 @@ const SurveyDetailPage = () => {
 
   const openFormInNewTab = () => {
     if (survey?.form_url) {
-      window.open(survey.form_url, '_blank', 'noopener,noreferrer');
+      const originalUrl = new URL(survey.form_url);
+      originalUrl.searchParams.delete('embedded');
+      window.open(originalUrl.toString(), '_blank', 'noopener,noreferrer');
     }
   };
 
@@ -156,16 +155,15 @@ const SurveyDetailPage = () => {
             >
               {survey.type === 'GENERAL' ? 'Khảo sát chung' : 'Khảo sát môn học'}
             </span>
-            <Tooltip title="Mở trong tab mới">
-              <IconButton
-                onClick={openFormInNewTab}
-                className={styles.openNewTabIcon}
-                size="small"
-              >
-                            Mở trong tab mới
-                             <OpenInNewIcon fontSize="small" />
-              </IconButton>
-            </Tooltip>
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={openFormInNewTab}
+              startIcon={<OpenInNewIcon />}
+              className={styles.openNewTabButton}
+            >
+              Mở trong tab mới
+            </Button>
           </div>
         </div>
       </div>
@@ -187,13 +185,14 @@ const SurveyDetailPage = () => {
                 <li>Tải lại trang</li>
                 <li>Mở biểu mẫu trong tab mới</li>
               </ul>
-              <button 
+              <Button 
+                variant="outlined"
                 onClick={openFormInNewTab}
+                startIcon={<OpenInNewIcon />}
                 className={styles.openNewTabButton}
               >
-                <OpenInNewIcon />
                 Mở trong tab mới
-              </button>
+              </Button>
             </Alert>
           </div>
         )}
@@ -207,6 +206,8 @@ const SurveyDetailPage = () => {
           frameBorder="0"
           marginHeight="0"
           marginWidth="0"
+          width="100%"
+          height="800px"
           allowFullScreen
         >
           Đang tải...

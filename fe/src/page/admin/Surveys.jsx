@@ -17,9 +17,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import { format } from 'date-fns';
 import styles from '../../styles/admin/Surveys.module.css';
-import { getAllSurveys, deleteSurvey, toggleSurveyActive, createSurvey } from '../../services/surveyServices';
+import { getAllSurveys, deleteSurvey, toggleSurveyActive, createSurvey, updateSurvey } from '../../services/surveyServices';
 import { useNavigation } from '../../components/admin/common/NavigationContext';
 import LoadingState from '../../components/admin/common/LoadingState';
+
+const UpdateSurveyModal = lazy(() => import('../../components/admin/surveys/UpdateSurveyModal'))
 
 const CreateSurveyModal = lazy(() => import('../../components/admin/surveys/CreateSurveyModal'));
 
@@ -29,6 +31,8 @@ const Surveys = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedSurvey, setSelectedSurvey] = useState(null);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const { isNavExpanded } = useNavigation();
 
   useEffect(() => {
@@ -79,6 +83,16 @@ const Surveys = () => {
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
+  };
+
+  const handleUpdateSurvey = async (id, surveyData) => {
+    try {
+      await updateSurvey(id, surveyData);
+      fetchSurveys();
+    } catch (error) {
+      console.error('Không thể cập nhật khảo sát:', error);
+      throw error;
+    }
   };
 
   const handleChangeRowsPerPage = (event) => {
@@ -144,7 +158,14 @@ const Surveys = () => {
                         />
                       </TableCell>
                       <TableCell align="right">
-                        <IconButton color="primary" title="Chỉnh sửa">
+                        <IconButton 
+                          color="primary" 
+                          title="Chỉnh sửa"
+                          onClick={() => {
+                            setSelectedSurvey(survey);
+                            setIsUpdateModalOpen(true);
+                          }}
+                        >
                           <EditIcon />
                         </IconButton>
                         <IconButton
@@ -185,6 +206,20 @@ const Surveys = () => {
           />
         )}
       </Suspense>
+
+      <Suspense fallback={<LoadingState />}>
+  {isUpdateModalOpen && selectedSurvey && (
+    <UpdateSurveyModal
+      open={isUpdateModalOpen}
+      onClose={() => {
+        setIsUpdateModalOpen(false);
+        setSelectedSurvey(null);
+      }}
+      onUpdate={handleUpdateSurvey}
+      survey={selectedSurvey}
+    />
+  )}
+</Suspense>
     </div>
   );
 };

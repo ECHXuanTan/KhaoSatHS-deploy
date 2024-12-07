@@ -27,11 +27,14 @@ const AddStudentsExcelModal = ({ open, onClose, onSuccess }) => {
 
     try {
       const data = await readExcelFile(file);
+      console.log('Data from Excel:', data); // Log the raw data for debugging
       const classStudentMap = processData(data);
+      console.log('Processed Class-Student Map:', classStudentMap); // Log processed data for debugging
       await addStudentsToMultipleClasses(classStudentMap);
       onSuccess?.();
       onClose();
     } catch (error) {
+      console.error('Error during file processing:', error); // Log error for debugging
       setError(error.response?.data?.error || error.message);
     } finally {
       setIsProcessing(false);
@@ -41,59 +44,102 @@ const AddStudentsExcelModal = ({ open, onClose, onSuccess }) => {
   const readExcelFile = (file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-      
+  
       reader.onload = (e) => {
         try {
           const data = e.target.result;
           const workbook = XLSX.read(data, { type: 'array' });
           const sheetName = workbook.SheetNames[0];
           const worksheet = workbook.Sheets[sheetName];
-          const jsonData = XLSX.utils.sheet_to_json(worksheet);
-          
+  
+          const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+          console.log('Raw Excel Data:', jsonData);
+  
           if (jsonData.length === 0) {
             throw new Error('File Excel không có dữ liệu');
           }
-          
-          resolve(jsonData);
+  
+          const [headerRow, ...dataRows] = jsonData;
+  
+          console.log('Header Row:', headerRow);
+          console.log('Data Rows:', dataRows);
+  
+          // Ensure the header row contains the required keys
+          const normalizedHeaderRow = headerRow.map((header) => header?.trim().toLowerCase());
+          if (!normalizedHeaderRow.includes('mã lớp') || !normalizedHeaderRow.includes('mã học sinh')) {
+            throw new Error('File Excel thiếu cột "Mã Lớp" hoặc "Mã Học Sinh"');
+          }
+  
+          // Map data rows into objects using the header row
+          const processedData = dataRows.map((row, index) => {
+            const rowData = {};
+            headerRow.forEach((header, colIndex) => {
+              rowData[header?.trim()] = row[colIndex];
+            });
+            rowData.__rowNum__ = index + 2; // Add row number for debugging
+            return rowData;
+          });
+  
+          console.log('Processed Data:', processedData);
+          resolve(processedData);
         } catch (error) {
           reject(new Error('Không thể đọc file Excel. Vui lòng kiểm tra định dạng file'));
         }
       };
-
+  
       reader.onerror = () => {
         reject(new Error('Không thể đọc file'));
       };
-
+  
       reader.readAsArrayBuffer(file);
     });
-  };
+  };  
 
   const processData = (data) => {
     const classStudentMap = {};
-
-    data.forEach(row => {
-      if (!row['Mã Lớp'] || !row['Mã Học Sinh']) {
+  
+    data.forEach((row, index) => {
+      console.log(`Processing row ${index + 1}:`, row); // Log each row for debugging
+  
+      // Normalize keys for dynamic matching
+      const normalizedKeys = Object.keys(row).reduce((acc, key) => {
+        acc[key.trim().toLowerCase()] = key; // Map normalized keys to original keys
+        return acc;
+      }, {});
+  
+      console.log('Normalized Keys:', normalizedKeys); // Log normalized keys
+  
+      // Dynamically find keys for "Mã Lớp" and "Mã Học Sinh"
+      const classKey = normalizedKeys['mã lớp'];
+      const studentKey = normalizedKeys['mã học sinh'];
+  
+      if (!classKey || !studentKey) {
         throw new Error('File Excel thiếu cột "Mã Lớp" hoặc "Mã Học Sinh"');
       }
-
-      const classId = row['Mã Lớp'].toString().trim();
-      const studentId = row['Mã Học Sinh'].toString().trim();
-
+  
+      const classId = row[classKey]?.toString().trim();
+      const studentId = row[studentKey]?.toString().trim();
+  
+      if (!classId || !studentId) {
+        throw new Error(`Dòng ${index + 1} thiếu dữ liệu ở cột "Mã Lớp" hoặc "Mã Học Sinh"`);
+      }
+  
       if (!classStudentMap[classId]) {
         classStudentMap[classId] = [];
       }
-      
+  
       if (!classStudentMap[classId].includes(studentId)) {
         classStudentMap[classId].push(studentId);
       }
     });
-
+  
     if (Object.keys(classStudentMap).length === 0) {
       throw new Error('Không tìm thấy dữ liệu hợp lệ trong file');
     }
-
+  
     return classStudentMap;
   };
+  
 
   const handleFileUpload = (event) => {
     const file = event.target.files?.[0];
@@ -112,16 +158,16 @@ const AddStudentsExcelModal = ({ open, onClose, onSuccess }) => {
     const template = [
       {
         'Mã Lớp': 'Ch_11 SINHLN',
-        'Mã Học Sinh': '240440'
+        'Mã Học Sinh': '240440',
       },
       {
         'Mã Lớp': 'Ch_11 SINHLN',
-        'Mã Học Sinh': '240441'
+        'Mã Học Sinh': '240441',
       },
       {
         'Mã Lớp': 'Ch_11SINH',
-        'Mã Học Sinh': '240501'
-      }
+        'Mã Học Sinh': '240501',
+      },
     ];
 
     const ws = XLSX.utils.json_to_sheet(template);
@@ -167,7 +213,6 @@ const AddStudentsExcelModal = ({ open, onClose, onSuccess }) => {
             id="excel-upload"
             disabled={isProcessing}
           />
-          
           <label htmlFor="excel-upload">
             <Button
               variant="outlined"
