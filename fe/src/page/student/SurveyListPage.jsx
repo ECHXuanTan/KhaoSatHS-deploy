@@ -44,8 +44,8 @@ const SurveyListPage = () => {
 
   const SurveyCard = ({ survey }) => {
     const handleClick = () => {
-      if (!survey.has_responded) {
-        navigate(`/student-survey/${survey.id}`);
+      if (!survey.has_responded && survey.form_url) {
+        window.open(survey.form_url, '_blank');
       }
     };
 
