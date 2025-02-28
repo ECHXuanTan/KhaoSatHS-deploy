@@ -5,8 +5,6 @@ import { NavigationProvider } from './components/admin/common/NavigationContext'
 import AdminLayout from './components/admin/common/AdminLayout';
 import Login from './page/auth/Login';
 import LoadingState from './components/admin/common/LoadingState';
-import Header from './components/admin/common/Header';
-import Footer from './components/admin/common/Footer';
 
 // Admin
 const Dashboard = lazy(() => import('./page/admin/Dashboard'));
@@ -34,7 +32,6 @@ function App() {
             <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
               <div style={{ flex: 1 }}>
                 {/* Render Header for non-admin pages */}
-                {window.location.pathname.startsWith('/admin') ? null : <Header />}
                 <Routes>
                   <Route path="/" element={<Login />} />
                   <Route path="/login" element={<Login />} />
@@ -58,7 +55,6 @@ function App() {
                   <Route path="/student-survey/:id" element={<SurveyDetailPage />} />
                 </Routes>
               </div>
-              <Footer />
             </div>
           </Suspense>
         </Router>
